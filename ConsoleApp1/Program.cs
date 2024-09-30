@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 
 namespace ConsoleApp1
 {
@@ -7,7 +8,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             // Titolo con colore
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("╔════════════════════════════════════════════╗");
             Console.WriteLine("║                                            ║");
             Console.WriteLine("║          ╔══════════════════════╗          ║");
@@ -35,9 +36,12 @@ namespace ConsoleApp1
             Console.ResetColor();
             Console.WriteLine("\n══════════════════════════════════════════════════════\n");
 
+
+
+
             // Razza
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Scegli la razza del tuo personaggio (Umano, Nano, Elfo, Mezzelfo, Mezzorco, Halfling, Gnomo, Tiefling, Dragonide):");
+            Console.WriteLine($"Scegli la razza di {nome} (Umano, Nano, Elfo, Mezzelfo, Mezzorco, Halfling, Gnomo, Tiefling, Dragonide):");
             Console.ForegroundColor = ConsoleColor.Cyan;
             string razzaInput = Console.ReadLine();
             Razza razza;
@@ -56,13 +60,13 @@ namespace ConsoleApp1
             if (razza == Razza.Nano)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Scegli la sotto-razza del tuo Nano (NanoDiMontagna, NanoDiCollina, Duergar):");
+                Console.WriteLine($"Scegli la sotto razza di {nome} (NanoDiMontagna, NanoDiCollina, Duergar):");
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 string sottoRazzaInput = Console.ReadLine();
                 while (!Enum.TryParse(sottoRazzaInput, true, out sottoRazza) || !Enum.IsDefined(typeof(SottoRazza), sottoRazza))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Sotto-razza non valida. Riprova:");
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     sottoRazzaInput = Console.ReadLine();
                 }
@@ -70,7 +74,7 @@ namespace ConsoleApp1
             else if (razza == Razza.Elfo)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Scegli la sotto-razza del tuo Elfo (ElfoAlto, ElfoSilvano, Drow):");
+                Console.WriteLine($"Scegli la sotto razza di {nome} (ElfoAlto, ElfoSilvano, Drow):");
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 string sottoRazzaInput = Console.ReadLine();
                 while (!Enum.TryParse(sottoRazzaInput, true, out sottoRazza) || !Enum.IsDefined(typeof(SottoRazza), sottoRazza))
@@ -81,12 +85,61 @@ namespace ConsoleApp1
                     sottoRazzaInput = Console.ReadLine();
                 }
             }
+
+            else if (razza == Razza.Halfling)
+            {
+                    Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sotto razza di {nome} (PiedeLesto, Vigoroso)");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoRazzaInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoRazzaInput, true, out sottoRazza) || !Enum.IsDefined(typeof(SottoRazza), sottoRazza))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto-razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoRazzaInput = Console.ReadLine();
+                }
+
+            }
+
+            else if (razza == Razza.Dragonide)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la discendeza draconica di {nome} (Argento, Bronzo, Ottone, Rame, Oro, Bianco, Blu, Nero, Rosso, Verde)");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoRazzaInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoRazzaInput, true, out sottoRazza) || !Enum.IsDefined(typeof(SottoRazza), sottoRazza))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto-razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoRazzaInput = Console.ReadLine();
+                }
+
+            }
+
+            else if (razza == Razza.Gnomo)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sotto razza di{nome} (GnomodellForeste, GnomodelleRocce)");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoRazzaInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoRazzaInput, true, out sottoRazza) || !Enum.IsDefined(typeof(SottoRazza), sottoRazza))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto-razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoRazzaInput = Console.ReadLine();
+                }
+
+            }
+
             Console.ResetColor();
             Console.WriteLine("\n══════════════════════════════════════════════════════\n");
 
             // Classe
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Scegli la classe del tuo personaggio (Barbaro, Bardo, Chierico, Druido, Guerriero, Ladro, Mago, Monaco, Paladino, Ranger, Stregone, Warlock):");
+            Console.WriteLine($"Scegli la classe di {nome} (Barbaro, Bardo, Chierico, Druido, Guerriero, Ladro, Mago, Monaco, Paladino, Ranger, Stregone, Warlock):");
             Console.ForegroundColor = ConsoleColor.Cyan;
             string classeInput = Console.ReadLine();
             Classe classe;
@@ -100,25 +153,212 @@ namespace ConsoleApp1
             Console.ResetColor();
             Console.WriteLine("\n══════════════════════════════════════════════════════\n");
 
-            // Sotto-Classe
+
+            // Livello, Punti Vita, e Statistiche
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Scegli la sotto-classe del tuo personaggio (se applicabile):");
+            Console.WriteLine($"Inserisci il livello di {nome}");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            string sottoClasseInput = Console.ReadLine();
-            Sottoclasse sottoClasse;
-            while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+            int livello = LeggiInputInteroValido();
+
+            Console.ResetColor();
+            Console.WriteLine("\n══════════════════════════════════════════════════════\n");
+
+
+
+            // Sotto-Classe
+            Sottoclasse sottoClasse = Sottoclasse.Nessuna;
+
+
+            if (classe == Classe.Barbaro && livello >= 3)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Sotto-classe non valida. Riprova:");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (GuerrieroTotemico, Berserker):");
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                sottoClasseInput = Console.ReadLine();
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
             }
+            else if (classe == Classe.Bardo && livello >=3)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (CollegioDellaConoscenza, CollegioDelValore):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+            }
+
+            else if (classe == Classe.Chierico)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (DominioDellaConoscenza, DominioDellaVita, DominioDellaLuce, DominioDellaNatura, DominioDellaTempesta, DominioDellInganno, DominioDellaGuerra):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+
+            }
+
+            else if (classe == Classe.Druido)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (CircoloDellaTerra, CircoloDellaLuna,):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+
+            }
+
+            else if (classe == Classe.Guerriero && livello >= 3)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (Campione, CavaliereMistico, MaestroDiBattaglia):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+            }
+
+            else if (classe == Classe.Ladro && livello >= 3)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (Furfante, Assassino):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+            }
+
+            else if (classe == Classe.Mago && livello >= 2)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (ScuolaDiAbiurazione, ScuolaDiAmmaliamento, ScuolaDiDivinazione, ScuolaDiEvocazione, ScuolaDiIllusione, ScuolaDiInvocazione, ScuolaDiNecromanzia, ScuolaDiTrasmutazione):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+            }
+
+            else if (classe == Classe.Monaco && livello >= 3)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (ViaDellaManoAperta, ViaDellOmbra, ViaDeiQuattroElementi):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+            }
+
+            else if (classe == Classe.Paladino && livello >= 3)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (GiuramentoDellaDevozione, GiuramentoDegliAntichi, GiuramentoDellaVendetta):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+            }
+
+            else if (classe == Classe.Ranger && livello >= 3)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (Cacciatore, MaestroDelleBestie):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+            }
+
+            else if (classe == Classe.Stregone)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (StregoneDelleOmbre, StregoneDellaFiamma, StregoneDellaTempesta, StregoneDellaFuria, StregoneDellaFede):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+            }
+
+            else if (classe == Classe.Warlock)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Scegli la sottoclasse di {nome} (PattoDellaCatena, PattoDellaLama, PattoDelTomo):");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string sottoClasseInput = Console.ReadLine();
+                while (!Enum.TryParse(sottoClasseInput, true, out sottoClasse) || !Enum.IsDefined(typeof(Sottoclasse), sottoClasse))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sotto razza non valida. Riprova:");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    sottoClasseInput = Console.ReadLine();
+                }
+            }
+
             Console.ResetColor();
             Console.WriteLine("\n══════════════════════════════════════════════════════\n");
 
             // Background
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Scegli il background del tuo personaggio (Accolito, Ciarlatano, Criminale, Intrattenitore, EroePopolare, ArtigianoDiGilda, Eremita, Nobile, Esploratore, Sapiente, Marinaio, Soldato, Monello):");
+            Console.WriteLine($"Scegli il background di {nome} (Accolito, ArtigianoDiGilda, Ciarlatano, Criminale, Eremita, EroePopolare");
+            Console.WriteLine();  // Interlinea Vuota sennò si appicica al testo sopra
+            Console.WriteLine("Forestiero, Intrattenitore, Marinaio, Monello, Nobile, Sapiente, Soldato)");
+
             Console.ForegroundColor = ConsoleColor.Cyan;
             string backgroundInput = Console.ReadLine();
             Background background;
@@ -148,18 +388,11 @@ namespace ConsoleApp1
             Console.ResetColor();
             Console.WriteLine("\n══════════════════════════════════════════════════════\n");
 
-
-            // Livello, Punti Vita, e Statistiche
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Inserisci il livello del tuo personaggio:");
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            int livello = LeggiInputInteroValido();
-
             int puntiVita = 0;
 
             Console.ForegroundColor = ConsoleColor.White;
 
-            Console.WriteLine("Inserisci la Forza del tuo personaggio:");
+            Console.WriteLine($"Inserisci la Forza  di {nome}:");
             Console.ForegroundColor = ConsoleColor.Cyan;
             int forza = LeggiInputInteroValido();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -167,7 +400,7 @@ namespace ConsoleApp1
             Console.WriteLine($"(Modificatore: {(modificatoreForza >= 0 ? $"+{modificatoreForza}" : $"{modificatoreForza}")})");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Inserisci la Destrezza del tuo personaggio:");
+            Console.WriteLine($"Inserisci la Destrezza  di {nome}:");
             Console.ForegroundColor = ConsoleColor.Cyan;
             int destrezza = LeggiInputInteroValido();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -175,7 +408,7 @@ namespace ConsoleApp1
             Console.WriteLine($"(Modificatore: {(modificatoreDestrezza >= 0 ? $"+{modificatoreDestrezza}" : $"{modificatoreDestrezza}")})");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Inserisci la Costituzione del tuo personaggio:");
+            Console.WriteLine($"Inserisci la Costituzione  di {nome}:");
             Console.ForegroundColor = ConsoleColor.Cyan;
             int costituzione = LeggiInputInteroValido();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -183,7 +416,7 @@ namespace ConsoleApp1
             Console.WriteLine($"(Modificatore: {(modificatoreCostituzione >= 0 ? $"+{modificatoreCostituzione}" : $"{modificatoreCostituzione}")})");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Inserisci l'Intelligenza del tuo personaggio:");
+            Console.WriteLine($"Inserisci l'Intelligenza  di {nome}:");
             Console.ForegroundColor = ConsoleColor.Cyan;
             int intelligenza = LeggiInputInteroValido();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -191,7 +424,7 @@ namespace ConsoleApp1
             Console.WriteLine($"(Modificatore: {(modificatoreIntelligenza >= 0 ? $"+{modificatoreIntelligenza}" : $"{modificatoreIntelligenza}")})");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Inserisci la Saggezza del tuo personaggio:");
+            Console.WriteLine($"Inserisci la Saggezza  di {nome}:");
             Console.ForegroundColor = ConsoleColor.Cyan;
             int saggezza = LeggiInputInteroValido();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -199,7 +432,7 @@ namespace ConsoleApp1
             Console.WriteLine($"(Modificatore: {(modificatoreSaggezza >= 0 ? $"+{modificatoreSaggezza}" : $"{modificatoreSaggezza}")})");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Inserisci il Carisma del tuo personaggio:");
+            Console.WriteLine($"Inserisci il Carisma di {nome}:");
             Console.ForegroundColor = ConsoleColor.Cyan;
             int carisma = LeggiInputInteroValido();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -210,12 +443,16 @@ namespace ConsoleApp1
             Console.WriteLine("\n══════════════════════════════════════════════════════\n");
 
             // Creazione del personaggio
-            Personaggio p = new Personaggio(nome, razza, sottoRazza, classe, sottoClasse, background, allineamento1, livello, puntiVita, forza, destrezza, costituzione, intelligenza, saggezza, carisma);
+            Personaggio p = new Personaggio(nome, razza, sottoRazza, classe, sottoClasse, background, allineamento1, livello, puntiVita,forza, destrezza, costituzione, intelligenza, saggezza, carisma);
 
             // Calcolo dei punti vita con i bonus
             p.CalcolaPuntiVitaConBonus();
 
             p.GetLingua();
+
+            //p.GetCompetenza();
+            p.ScegliCompetenze( nome, classe);
+            p.ScegliEquipaggiamento(nome, classe);
 
             p.SetLingue();
 
@@ -247,5 +484,6 @@ namespace ConsoleApp1
             }
             return risultato;
         }
+
     }
 }
